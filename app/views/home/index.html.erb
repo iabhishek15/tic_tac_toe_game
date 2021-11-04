@@ -1,0 +1,162 @@
+<!-- <i class="bi bi-x-lg" id = 'x'></i> -->	
+<p id = "currentMoveNoti"></p>
+
+<div class = "container mt-5">
+	<div class = "row">
+		<div class = "col-5">
+			<div class ="leftOption">
+				<button class='btn btn-warning m-2' id = "friendBtn">Play with friend</button>
+			</div>
+			<div class ="leftOption">
+				<button class='btn btn-warning m-2' id = "computerBtn">computer</button>
+			</div>
+			<div class ="leftOption">
+				<button class='btn btn-warning m-2' id = "offlineBtn">1 vs 1 (offline)</button>
+			</div>
+		</div>
+		<div class = "col-5">
+			<div class = "row" id = "grid">
+				<div class = 'col-4 gl' id ='cell0'>X</div>
+				<div class = 'col-4 gl' id ='cell1'></div>
+				<div class = 'col-4 gl' id ='cell2'></div>
+				<div class = 'col-4 gl' id ='cell3'></div>
+				<div class = 'col-4 gl' id ='cell4'></div>
+				<div class = 'col-4 gl' id ='cell5'></div>
+				<div class = 'col-4 gl' id ='cell6'></div>
+				<div class = 'col-4 gl' id ='cell7'></div>
+				<div class = 'col-4 gl' id ='cell8'></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+//document.cookie 
+//getCookie(cookieName)
+
+const friendBtn = document.getElementById('friendBtn');
+const computerBtn = document.getElementById('computerBtn');
+const offlineBtn = document.getElementById('offlineBtn');
+const currentMoveNoti = document.getElementById('currentMoveNoti');
+
+
+function getCookie(cookieName) {
+	cookieName += "="; 
+	cookies = document.cookie.split(';');
+	let res;
+	cookies.forEach((c) => {
+		console.log(c);
+		if (c.indexOf(cookieName) === 0) {
+			res = c.substring(cookieName.length); 
+			//return c.substring(cookieName.length); 
+			//this is not correct as return is not done on the function 
+		}
+	});
+	return res;
+}
+
+function setCookie(cName) {
+	cName += "="; 
+	let cookies = document.cookie.split(';');
+	let res;
+	cookies.forEach((c) => {
+		if (c.indexOf(cName) === 0) {
+			res = c.substring(cName.length); 
+		}
+	});
+	return res;
+}
+
+function deleteCookie(cName) {
+	document.cookie
+}
+
+
+function setCookie(cname, cvalue, exdays = 1) {
+	cname += "=";
+	let cookies = document.cookie.split();
+
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + cvalue + ";" + expires + ";path=/";
+}
+
+
+
+offlineBtn.addEventListener('click', function () {
+	console.log('offlineBtn is clicked');
+	friendBtn.disabled = true;
+	computerBtn.disabled = true;
+  currentMoveNoti.innerHTML = '1';
+  // setCookie('name', 1);
+  // console.log(getCookie('name'));
+  // setCookie('name', 2);
+  // console.log(getCookie('name'));
+  console.log(document.cookie);
+
+
+}); 
+
+
+</script>
+
+
+
+
+
+<style>
+	.leftOption {
+		right: 10% !important;
+	}
+	#grid {
+		height: 360px;
+		background-color: white;
+		box-shadow: -4px 4px 4px 4px darkgrey;
+	}
+	.gl {
+		font-size: 80px;
+		text-align: center;
+		height: 120px;
+	}
+	.gl:hover {
+	  background-color: lightgrey;
+	  transition: background-color .5s;
+	  cursor: pointer;
+	}
+	#cell0, #cell3, #cell6, #cell1, #cell4, #cell7 {
+		border: solid black;
+		border-width:0px 1px 1px 0px;
+	}
+	#cell2, #cell5 {
+		border: solid black;
+		border-width:0px 0px 1px 0px;
+	}
+	#cell6  {
+		border: solid black;
+		border-width:0px 1px 0px 0px;
+	}
+	#cell7  {
+		border: solid black;
+		border-width:0px 1px 0px 0px;
+	}
+	p {
+		text-align: center;
+		color: red;
+		font-size: 30px;
+	}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+

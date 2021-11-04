@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TicTacToe</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css' %>
+  </head>
+
+  <body>
+    <div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <%= link_to 'home', home_path, class:'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'login', login_path, class:'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'singup', signup_path, class:'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'logout', logout_path, class:'nav-link' %>
+        </li>
+    </div>
+</nav>
+  </div>
+    <%= yield %>
+  </body>
+</html>
+
+<style>
+  body, html{
+    background-color: #ddd;
+  }
+  nav {
+    background-color: white;
+  }
+</style>
