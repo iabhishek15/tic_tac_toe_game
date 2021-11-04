@@ -1,14 +1,23 @@
-<div class = 'container mt-5'>
+<div class = 'container mt-5' id = "login">
 <p><%= notice %></p>
-<%= form_with do |form| %>
+<p style="color:red;"><%= alert %></p>
+
+<%= form_with url:login_create_path do |form| %>
 	<div class = 'form-group'>
-		<%= form.text_field :username, class:'form-control', placeholder:'username'%>
-	</div>
+		<%= form.text_field :username, class:'form-control',placeholder:"username"%>
+	</div>       
 	<div class = 'form-group'>
-		<%= form.text_field :password, class: 'form-control', placeholder:'password' %>
+		<%= form.password_field :password, class:'form-control',placeholder:"password"%>
 	</div>
 	<div>
-		<%= form.submit 'signup', class:'btn btn-primary' %>
+		<%= form.submit 'signup', class:'btn btn-warning' %>
 	</div>
 </div>
 <% end %>
+
+
+<style>
+	#login {
+		width: 60%;
+	}
+</style>

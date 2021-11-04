@@ -1,4 +1,4 @@
-<div class = 'container mt-5'>
+<div class = 'container mt-5' id = "signup">
 <%= form_with(model:@user, local:true) do |user_form| %>
 	<% if @user.errors.any? %>
     <div id="error_explanation">
@@ -15,13 +15,19 @@
 		<%= user_form.text_field :username, class:'form-control', placeholder:'username'%>
 	</div>
 	<div class = 'form-group'>
-		<%= user_form.text_field :password, class: 'form-control', placeholder:'password' %>
+		<%= user_form.password_field :password, class: 'form-control', placeholder:'password' %>
 	</div>
 	<div class = 'form-group'>
-		<%= user_form.text_field :password_confirmation, class: 'form-control', placeholder:'password_confirmation'%>
+		<%= user_form.password_field :password_confirmation, class: 'form-control', placeholder:'password_confirmation'%>
 	</div>
 	<div>
 		<%= user_form.submit 'signup', class:'btn btn-warning'%>
 	</div>
 <% end %>
 </div>
+
+<style>
+	#signup {
+		width: 60%;
+	}
+</style>

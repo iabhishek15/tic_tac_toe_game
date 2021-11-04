@@ -1,13 +1,21 @@
 class SessionController < ApplicationController
-  def login
+
+  def login 
+    if current_user
+      redirect_to home_url 
+    end
+  end 
+
+  def create
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id 
-      redirect_to root_url, notice: 'Logged In!'
+      redirect_to home_url, notice: 'Logged In!'
     else
-      flash.now[:alert] = 'Email or Password is Invalid'
-      render 'login'
-    end
+      respond_to do |format|
+       format.html {redirect_to login_url, alert:'Email or Password is Invalid'}
+      end
+    end 
   end
 
   def logout
@@ -16,7 +24,9 @@ class SessionController < ApplicationController
   end
 
   def signup
-    puts "session id : #{session[:user_id]}"
+    if current_user 
+      redirect_to home_url
+    end
     @user = User.new
   end
 
