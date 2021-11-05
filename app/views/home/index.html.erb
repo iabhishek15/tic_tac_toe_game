@@ -62,29 +62,16 @@
 
 <script>
 
-function disableAllButton(c) {
-	for (let i = 0; i < 9; ++i) {
-		document.getElementById(String(i)).style.pointerEvents = c;
-	}
-}
-
-window.onload = function () {
-	//computerMove();
-	for (let i = 0; i < 9; ++i) {
-		document.getElementById(String(i)).style.pointerEvents = "none";
-	}
-}
-
-let playerOneMove = 1;
+var playerOneMove = 1;
 //let isGameOver = 0;
-let playingWithComputer = 0;
-let computerGoesFirst = 0;
-let TotalDone = 0;
+var playingWithComputer = 0;
+var computerGoesFirst = 0;
+var TotalDone = 0;
 
 
-let sz = 9;
-let dp = new Array(1 << sz);
-let bestMove = new Array(1 << sz);
+var sz = 9;
+var dp = new Array(1 << sz);
+var bestMove = new Array(1 << sz);
 
 for (let i = 0; i < (1 << sz); ++i) {
 	dp[i] = new Array(1 << sz);
@@ -102,7 +89,7 @@ for (let i = 0; i < (1 << sz); ++i) {
 	}
 }
 
-let gameState = new Array(3);
+var gameState = new Array(3);
 for (let i = 0; i < 3; ++i) {
 	gameState[i] = new Array(3);
 	for (let j = 0; j < 3; ++j) {
@@ -110,18 +97,32 @@ for (let i = 0; i < 3; ++i) {
 	}
 }
 
-let ids = [
+var ids = [
 	[0, 1, 2],
 	[3, 4, 5],
 	[6, 7, 8]
 ];
 
-const friendBtn = document.getElementById('friendBtn');
-const computerBtn = document.getElementById('computerBtn');
-const offlineBtn = document.getElementById('offlineBtn');
-const currentMoveNoti = document.getElementById('currentMoveNoti');
-const restart = document.getElementById('restart');
+var friendBtn = document.getElementById('friendBtn');
+var computerBtn = document.getElementById('computerBtn');
+var offlineBtn = document.getElementById('offlineBtn');
+var currentMoveNoti = document.getElementById('currentMoveNoti');
+var restart = document.getElementById('restart');
 
+
+
+function disableAllButton(c) {
+	for (let i = 0; i < 9; ++i) {
+		document.getElementById(String(i)).style.pointerEvents = c;
+	}
+}
+
+window.onload = function () {
+	//computerMove();
+	for (let i = 0; i < 9; ++i) {
+		document.getElementById(String(i)).style.pointerEvents = "none";
+	}
+}
 
 restart.addEventListener('click', function () {
 	disableAllButton("none");
@@ -133,6 +134,8 @@ restart.addEventListener('click', function () {
 	computerGoesFirst = 0;
 	TotalDone = 0;
 	currentMoveNoti.innerHTML = 'Start New Game';
+	computerBtn.disabled = false;
+	offlineBtn.disabled = false;
 });
 
 
@@ -144,8 +147,6 @@ function getCookie(cookieName) {
 		console.log(c);
 		if (c.indexOf(cookieName) === 0) {
 			res = c.substring(cookieName.length); 
-			//return c.substring(cookieName.length); 
-			//this is not correct as return is not done on the function 
 		}
 	});
 	return res;
