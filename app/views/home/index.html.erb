@@ -193,7 +193,7 @@ function diableAll() {
 
 //offline play
 offlineBtn.addEventListener('click', function () {
-	console.log('offlineBtn is clicked');
+	//console.log('offlineBtn is clicked');
 	diableAll();
 	for (let i = 0; i < 9; ++i) {
 		document.getElementById(String(i)).style.pointerEvents = "auto";
@@ -207,7 +207,7 @@ offlineBtn.addEventListener('click', function () {
 
 //computer play
 computerBtn.addEventListener('click', function () {
-	if (!confirm('Do you want to go first?')) {
+	if (!confirm(`Do you want to go first?\n(You can try, but the best you can do is not lose.)`)) {
 		computerGoesFirst = 1;
 		//currentMoveNoti.style.visibility = 'visible';
 		currentMoveNoti.innerHTML = 'You are O';
