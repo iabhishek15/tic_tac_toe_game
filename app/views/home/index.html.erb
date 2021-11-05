@@ -43,23 +43,6 @@
 </div>
 
 
-<!-- <div class="modal" id ="myModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes hedfdfdfddddddddd	re.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
- -->
-
 <script>
 
 var playerOneMove = 1;
@@ -234,11 +217,8 @@ for (let cellId = 0; cellId < 9; ++cellId) {
 
 	document.getElementById(cellId).addEventListener('click', function () {
 
-		//when game is over don't do anything
-
 		const currCell = document.getElementById(cellId);
 
-		//console.log('what is the condition', playerOneMove);
 
 		if (playingWithComputer) {
 			computerPlay(cellId);
@@ -416,41 +396,6 @@ function computerPlay(Id) {
 	}
 
 }
-
-// function dealing(val) {
-// 	let k = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
-// 	for (let i = 0; i < 3; ++i) {
-// 		for (let j = 0; j < 3; ++j) {
-// 			if (k[i][j] === val) {
-// 				return [i, j];
-// 			}
-// 		}
-// 	} 
-// }
-
-// function calling(i, d) {
-// 	for (let s = 0; s < sz; ++s) {
-// 		if ((i >> s) & 1) {
-// 			let index = dealing(s);
-// 			gameState[index[0]][index[1]] = d;
-// 		}
-// 	}
-// }
-
-// function computerMove() {
-// 	for (let i = 0; i < (1 << sz); ++i) {
-// 		calling(i, 1);
-// 		for (let j = 0; j < (1 << sz); ++j) {
-// 			if ((i & j) === 0) {
-// 				calling(j, 0);
-// 				rec(i, j, 0);
-// 				rec(i, j, 1);
-// 				calling(j, -1);
-// 			}
-// 		}
-// 		calling(i, -1);
-// 	}
-// }
 
 
 //dynamic programming solution for optimal stratergy
