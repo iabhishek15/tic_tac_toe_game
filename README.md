@@ -1,9 +1,9 @@
 # Tic-Tac-Toe Game
 
 Installation 
-1) git clone https://github.com/iabhishek15/tic_tac_toe
-2) rails db:migrate
-3) rails server
+1) `git clone https://github.com/iabhishek15/tic_tac_toe`
+2) `rails db:migrate`
+3) `rails server`
 
 Feature of the game 
 1) 1 vs 1 (offline) - you can play 1 vs 1 with your friend in offline mode.
