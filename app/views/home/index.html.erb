@@ -1,5 +1,5 @@
 <!-- <i class="bi bi-x-lg" id = 'x'></i> -->	
-<p id = "currentMoveNoti">Game yet to begin</p>
+<p id = "currentMoveNoti">Start New Game</p>
 
 <!-- <button type="button" data-toggle="modal" data-target="#myModal">testing</button>
  -->
@@ -9,7 +9,7 @@
 		<div class = "col-5">
 			<%= form_with url:gamelogic_path do |form| %>
 				<div class ="leftOption">
-					<%= form.submit 'Friend(Work In Progress)',class:'btn btn-warning m-2', id:'friendBtn',name:'friend', disabled:true%>
+					<%= form.submit 'Friends Online(Work In Progress)',class:'btn btn-warning m-2', id:'friendBtn',name:'friend', disabled:true%>
 				</div>
 			<% end %>		
 			<%= form_with url:gamelogic_path do |form| %>
@@ -22,6 +22,9 @@
 					<%= form.submit '1 vs 1(offline)',class:'btn btn-warning m-2', id:'offlineBtn'%>
 				</div>
 			<% end %>	
+				<div class ="leftOption">
+					<button class = "btn btn-warning m-2" id = "restart">Restart</button>
+				</div>
 		</div>
 		<div class = "col-5">
 			<div class = "row" id = "grid">
@@ -75,7 +78,7 @@ window.onload = function () {
 let playerOneMove = 1;
 //let isGameOver = 0;
 let playingWithComputer = 0;
-let computerGoesFirst = 1;
+let computerGoesFirst = 0;
 let TotalDone = 0;
 
 
@@ -117,6 +120,20 @@ const friendBtn = document.getElementById('friendBtn');
 const computerBtn = document.getElementById('computerBtn');
 const offlineBtn = document.getElementById('offlineBtn');
 const currentMoveNoti = document.getElementById('currentMoveNoti');
+const restart = document.getElementById('restart');
+
+
+restart.addEventListener('click', function () {
+	disableAllButton("none");
+	for (let i = 0; i < 9; ++i) {
+		document.getElementById(String(i)).innerHTML = '';
+	}
+	playerOneMove = 1;
+	playingWithComputer = 0;
+	computerGoesFirst = 0;
+	TotalDone = 0;
+	currentMoveNoti.innerHTML = 'Start New Game';
+});
 
 
 function getCookie(cookieName) {
@@ -181,7 +198,7 @@ offlineBtn.addEventListener('click', function () {
 		document.getElementById(String(i)).style.pointerEvents = "auto";
 	}
   currentMoveNoti.innerHTML = 'Player 1 to move...';
-  currentMoveNoti.style.visibility = 'visible';
+  //currentMoveNoti.style.visibility = 'visible';
   setCookie("move", 1);
   console.log(document.cookie);
   playerOneMove = 1;
@@ -189,11 +206,19 @@ offlineBtn.addEventListener('click', function () {
 
 //computer play
 computerBtn.addEventListener('click', function () {
+	if (!confirm('Do you want to go first?')) {
+		computerGoesFirst = 1;
+		//currentMoveNoti.style.visibility = 'visible';
+		currentMoveNoti.innerHTML = 'You are O';
+	}else {
+		//currentMoveNoti.style.visibility = 'visible';
+		currentMoveNoti.innerHTML = 'You are X';
+	}
+	playingWithComputer = 1;
 	diableAll();
 	for (let i = 0; i < 9; ++i) {
 		document.getElementById(String(i)).style.pointerEvents = "auto";
 	}
-	playingWithComputer = 1;
 	if (computerGoesFirst) {
 		rec(0, 0, computerGoesFirst);
 		let x = bestMove[0][0][1][0];
@@ -331,6 +356,7 @@ function computerPlay(Id) {
 		document.getElementById(Id).innerHTML = 'O';
 	}
 	if (didSomeoneWin(playerGoesFirst)) {
+		currentMoveNoti.innerHTML = 'You Won';
 		return alert('game is over you won');
 	}
 
@@ -384,6 +410,7 @@ function computerPlay(Id) {
 	}
 
 	if (didSomeoneWin(computerGoesFirst)) {
+		currentMoveNoti.innerHTML = 'Computer Won';
 		return alert('game is over computer won');
 	}
 
@@ -429,6 +456,10 @@ function computerPlay(Id) {
 function rec(a, b, move) {
 	let notMove = (move == 1)?0:1;
 
+	if ((a | b) === ((1 << sz) - 1)) {
+		return 2;
+	}
+
 	if (didSomeoneWin	(notMove)) {
 		dp[a][b][move] = notMove;
 		return dp[a][b][move];
@@ -441,6 +472,8 @@ function rec(a, b, move) {
 	let res = notMove;
 	let x_pos;
 	let y_pos;
+	let x_pos_2 = -1;
+	let y_pos_2 = -1;
 
 	for (let i = 0; i < 3; ++i) {
 		for (let j = 0; j < 3; ++j) {
@@ -464,12 +497,23 @@ function rec(a, b, move) {
 					y_pos = j;
 					res = move;
 				}
+				if (w == 2) {
+					x_pos_2 = i;
+					y_pos_2 = j;
+				}
 			}
 		}
+	}
+	if (res !== move && x_pos_2 != -1) {
+		res = 2;
 	}
 	dp[a][b][move] = res;
 	if (move === res) {
 		bestMove[a][b][move] = [x_pos, y_pos];
+	}else {
+		if (x_pos_2 !== -1) {
+			bestMove[a][b][move] = [x_pos_2, y_pos_2];
+		}
 	}
 	return res;
 }
@@ -514,7 +558,7 @@ function rec(a, b, move) {
 		text-align: center;
 		color: red;
 		font-size: 30px;
-		visibility: hidden;
+		/*visibility: hidden;*/
 	}
 </style>
 

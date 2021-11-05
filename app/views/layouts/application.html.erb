@@ -22,21 +22,23 @@
         <li class="nav-item active">
           <%= link_to 'home', home_path, class:'nav-link' %>
         </li>
-        <% if current_user %>
-          <li class="nav-item active">
-            <%= link_to current_user.username, home_path, class:'nav-link' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'logout', logout_path, class:'nav-link' %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to 'login', login_path, class:'nav-link' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'singup', signup_path, class:'nav-link' %>
-          </li>
+        <div class = "container" id = "logDiv">
+          <% if current_user %>
+            <li class="nav-item active">
+              <%= link_to current_user.username, home_path, class:'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'logout', logout_path, class:'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'login', login_path, class:'nav-link btn-sm btn-warning' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'singup', signup_path, class:'nav-link' %>
+            </li>
         <% end %>
+      </div>
     </div>
 </nav>
   </div>
