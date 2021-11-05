@@ -338,6 +338,7 @@ function computerPlay(Id) {
 	}
 	if (didSomeoneWin(playerGoesFirst)) {
 		currentMoveNoti.innerHTML = 'You Won';
+		disableAllButton("none");
 		return alert('game is over you won');
 	}
 
@@ -392,6 +393,7 @@ function computerPlay(Id) {
 
 	if (didSomeoneWin(computerGoesFirst)) {
 		currentMoveNoti.innerHTML = 'Computer Won';
+		disableAllButton("none");
 		return alert('game is over computer won');
 	}
 
