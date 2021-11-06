@@ -161,6 +161,7 @@ computerBtn.addEventListener('click', function () {
 		let x = bestMove[0][0][1][0];
 		let y = bestMove[0][0][1][1];
 		let index = getId(x, y);
+    TotalDone += 1;
     document.getElementById(String(index)).style.pointerEvents = "none";
 		document.getElementById(index).innerHTML = 'X';
 	}
@@ -201,16 +202,18 @@ for (let cellId = 0; cellId < 9; ++cellId) {
 			currentMoveNoti.innerHTML = 'Player 2 to move...';
 		}
 		TotalDone += 1;
-		if (TotalDone === sz) {
-			alert('Game has ended in a tie');
-			currentMoveNoti.innerHTML = 'Tie';
-		} 
-
 		currCell.disabled = true;
-
+    if (TotalDone === sz) {
+      gameTie();
+    }
 	});
 }
 
+function gameTie() {
+  alert('Game has ended in a tie');
+  currentMoveNoti.innerHTML = 'Tie';
+  TotalDone = 0;
+}
 
 
 
@@ -290,6 +293,11 @@ function computerPlay(Id) {
 	}else {
 		document.getElementById(Id).innerHTML = 'O';
 	}
+  TotalDone += 1;
+  if (TotalDone === sz) {
+    gameTie();
+    return ;
+  }
 	if (didSomeoneWin(playerGoesFirst)) {
 		currentMoveNoti.innerHTML = 'You Won';
 		disableAllButton("none");
@@ -342,12 +350,17 @@ function computerPlay(Id) {
 	let index = getId(x, y);
 
   document.getElementById(String(index)).style.pointerEvents = "none";
-	
 	if (computerGoesFirst) {
 		document.getElementById(index).innerHTML = 'X';
 	}else {
 		document.getElementById(index).innerHTML = 'O';
 	}
+	TotalDone += 1;
+  //console.log(TotalDone);
+  if (TotalDone === sz) {
+    gameTie();
+    return ;
+  }
 
 	if (didSomeoneWin(computerGoesFirst)) {
 		currentMoveNoti.innerHTML = 'Computer Won';
