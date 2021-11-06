@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css' %>
   </head>
 
@@ -43,8 +42,8 @@
   </div>
     <%= yield %>
   </body>
+    <%= javascript_include_tag 'application' %>
 </html>
-
 <style>
   body, html{
     background-color: #ddd;
